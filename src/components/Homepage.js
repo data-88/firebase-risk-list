@@ -12,8 +12,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import CheckIcon from '@mui/icons-material/Check';
 
 export default function Homepage() {
-  const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [risk, setRisk] = useState("");
+  const [risk, setRisk] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
@@ -23,11 +23,11 @@ export default function Homepage() {
       if (user) {
         // read
         onValue(ref(db, `/${auth.currentUser.uid}`), (snapshot) => {
-          setTodos([]);
+          setRisks([]);
           const data = snapshot.val();
           if (data !== null) {
-            Object.values(data).map((todo) => {
-              setTodos((oldArray) => [...oldArray, todo]);
+            Object.values(data).map((risk) => {
+              setRisks((oldArray) => [...oldArray, risk]);
             });
           }
         });
@@ -51,27 +51,27 @@ export default function Homepage() {
   const writeToDatabase = () => {
     const uidd = uid();
     set(ref(db, `/${auth.currentUser.uid}/${uidd}`), {
-      todo: todo,
+      risk: risk,
       uidd: uidd
     });
 
-    setTodo("");
+    setRisk("");
   };
 
   // update
-  const handleUpdate = (todo) => {
+  const handleUpdate = (risk) => {
     setIsEdit(true);
-    setTodo(todo.todo);
-    setTempUidd(todo.uidd);
+    setRisk(risk.risk);
+    setTempUidd(risk.uidd);
   };
 
   const handleEditConfirm = () => {
     update(ref(db, `/${auth.currentUser.uid}/${tempUidd}`), {
-      todo: todo,
+      risk: risk,
       tempUidd: tempUidd
     });
 
-    setTodo("");
+    setRisk("");
     setIsEdit(false);
   };
 
@@ -85,22 +85,22 @@ export default function Homepage() {
       <input
         className="add-edit-input"
         type="text"
-        placeholder="Add todo..."
-        value={todo}
-        onChange={(e) => setTodo(e.target.value)}
+        placeholder="Add risk..."
+        value={risk}
+        onChange={(e) => setRisk(e.target.value)}
       />
 
-      {todos.map((todo) => (
-        <div className="todo">
-          <h1>{todo.todo}</h1>
+      {risks.map((risk) => (
+        <div className="risk">
+          <h1>{risk.risk}</h1>
           <EditIcon
             fontSize="large"
-            onClick={() => handleUpdate(todo)}
+            onClick={() => handleUpdate(risk)}
             className="edit-button"
           />
           <DeleteIcon
             fontSize="large"
-            onClick={() => handleDelete(todo.uidd)}
+            onClick={() => handleDelete(risk.uidd)}
             className="delete-button"
           />
         </div>
