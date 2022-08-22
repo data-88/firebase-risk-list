@@ -7,7 +7,7 @@ import {
 import { auth } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import "./welcome.css";
-import RiskSVG from '../assets/risk-svg.svg'
+import RiskSVG from '../assets/risk.svg'
 
 export default function Welcome() {
   const [email, setEmail] = useState("");
