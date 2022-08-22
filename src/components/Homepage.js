@@ -13,7 +13,6 @@ import CheckIcon from '@mui/icons-material/Check';
 
 export default function Homepage() {
   const [risk, setRisk] = useState("");
-  const [risk, setRisk] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
